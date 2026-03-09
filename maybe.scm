@@ -18,7 +18,7 @@
       (unwrap maybe)
       default))
 
-(define (ok-and maybe f)
+(define (maybe-map maybe f)
   (if (just? maybe)
       (f (unwrap maybe))
       (nothing)))
