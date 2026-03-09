@@ -12,3 +12,8 @@
   (if (just? maybe)
       (cadr maybe)
       (error "tried to unwrap nothing value")))
+
+(define (ok-and maybe f)
+  (if (just? maybe)
+      (f (unwrap maybe))
+      (nothing)))
