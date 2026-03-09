@@ -32,7 +32,7 @@
 ;; tests
 
 (define (assert-eq expected actual)
-  (if (not (eq? expected actual))
+  (if (not (equal? expected actual))
       (error "assertion failed: expected " expected 'but 'got actual)))
 
 (assert-eq (just 3) (nothing))
