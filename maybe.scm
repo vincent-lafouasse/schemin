@@ -35,4 +35,6 @@
   (if (not (equal? expected actual))
       (error "assertion failed: expected " expected 'but 'got actual)))
 
-(assert-eq (just 3) (nothing))
+(assert-eq (just 3)    (list 'just 3))
+(assert-eq (just "67") (list 'just "67"))
+(assert-eq (nothing)   (list 'nothing))
