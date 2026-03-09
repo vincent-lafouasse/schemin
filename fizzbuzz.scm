@@ -1,5 +1,6 @@
 (define (divides n dividor) (= 0 (modulo n dividor)))
 
+; terrible and non extensible, i don't like it either
 (define (fizzbuzz n)
   (cond ((divides n 15) "fizzbuzz")
         ((divides n 3)  "fizz")
