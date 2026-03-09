@@ -27,6 +27,10 @@
 
 (define (sum-list my-list) (foldl my-list + 0))
 
+(define (len-also my-list) (foldl my-list
+                                  (lambda (acc _) (+ 1 acc))
+                                  0))
+
 ;;; "mutators"
 
 (define (push-front element my-list)
