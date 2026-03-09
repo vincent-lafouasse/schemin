@@ -8,9 +8,12 @@
         (else                  (last (cdr my-list)))))
 
 (define (len my-list)
-  (if (null? my-list)
-      0
-      (+ 1 (len (cdr my-list)))))
+  (define (iter my-list acc)
+    (if (null? my-list)
+        acc
+        (iter (cdr my-list) (+ 1 acc))))
+
+  (iter my-list 0))
 
 ;;; "mutators"
 
