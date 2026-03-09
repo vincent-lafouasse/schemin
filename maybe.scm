@@ -28,3 +28,11 @@
   (cond ((nothing? maybe)       (nothing))
         ((pred? (unwrap maybe)) maybe)
         (else                   (nothing))))
+
+;; tests
+
+(define (assert-eq expected actual)
+  (if (not (eq? expected actual))
+      (error "assertion failed: expected " expected 'but 'got actual)))
+
+(assert-eq (just 3) (nothing))
