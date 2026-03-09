@@ -22,3 +22,9 @@
   (if (just? maybe)
       (f (unwrap maybe))
       (nothing)))
+
+
+(define (maybe-filter maybe pred?)
+  (cond ((nothing? maybe)       (nothing))
+        ((pred? (unwrap maybe)) maybe)
+        (else                   (nothing))))
