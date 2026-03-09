@@ -15,6 +15,18 @@
 
   (iter my-list 0))
 
+; `combine` is a binary operator that combines the accumulator with the current element
+; next-accumulator = (combine accumulator element)
+(define (foldl my-list combine init)
+  (define (iter my-list acc)
+    (if (null? my-list)
+        acc
+        (iter (cdr my-list) (combine acc (car my-list)))))
+
+  (iter my-list init))
+
+(define (sum-list my-list) (foldl my-list + 0))
+
 ;;; "mutators"
 
 (define (push-front element my-list)
