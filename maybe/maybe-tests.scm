@@ -1,4 +1,4 @@
-(load "maybe.scm")
+(load "maybe/maybe.scm")
 
 (define (assert-eq expected actual)
   (if (not (equal? expected actual))
