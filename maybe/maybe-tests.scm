@@ -1,9 +1,5 @@
 (load "maybe/maybe.scm")
 
-(define (assert-eq expected actual)
-  (if (not (equal? expected actual))
-      (error "assertion failed: expected " expected 'but 'got actual)))
-
 ; do not come at me for the non standard formatting i do not care
 (define-syntax assert-eq
   (syntax-rules ()
@@ -16,8 +12,21 @@
         let ((expected-value expected-expr) (actual-value actual-expr))
 
         (if (not (equal? expected-value actual-value))
-            (error "something use both 'expr and value")
-        )
+          (begin
+            (display "-- assertion failed")
+            (newline)
+            (display "--   expected: ")
+            (display 'expected-expr)
+            (display " => ")
+            (display expected-value)
+            (newline)
+            (display "--   actual: ")
+            (display 'actual-expr)
+            (display " => ")
+            (display actual-value)
+            (newline)
+            (error "assertion failed")
+        ))
       )
     )))
 
