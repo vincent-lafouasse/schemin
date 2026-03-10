@@ -1,5 +1,6 @@
 (load "maybe/maybe.scm")
 (load "assert.scm")
+(load "color.scm")
 
 ;;; accessors
 
@@ -67,7 +68,7 @@
   (assert-eq (list/sum '(67))  67)
   (assert-eq (list/sum '(1 2)) 3)
 
-  (display "-- everything ok\n")
+  (display (colorize color/green "-- everything ok\n"))
 ))
 
 (list/tests)
