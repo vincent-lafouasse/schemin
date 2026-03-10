@@ -36,3 +36,12 @@
 ; else            , this evaluates to a - b ie a + abs(b)
 ;
 ; this is indeed a-plus-abs-b
+
+; 1.5 applicative-order vs norma-order
+; in each case what happens if we do:
+
+(define (p) (p))  ; infinite loop
+(define (test x y)
+  (if (= x 0) 0 y))
+
+; hmmm
