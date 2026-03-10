@@ -58,6 +58,10 @@
 ; applicative order. they are eagerly evaluated
 ;
 ; here in particular, (p) can never be evaluated but it doesn't have to be
+;
+; we can note that macros substitute their arguments without evaluating them
+; (that's the whole point)
+; so macros have normal-order evaluation
 
 ; so in normal order,
 (test 0 (p))       ; test is expanded without ever evaluating its arguments
