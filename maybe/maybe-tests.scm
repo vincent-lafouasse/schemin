@@ -16,9 +16,9 @@
             (display "-- assertion failed")
             (newline)
             (display "--   expected: ")
-            (display 'expected-expr)
+            (display 'expected-expr) ; the quote means: do not evaluate, just print the S-expression
             (display " => ")
-            (display expected-value)
+            (display expected-value) ; this is the value
             (newline)
             (display "--   actual:   ")
             (display 'actual-expr)
