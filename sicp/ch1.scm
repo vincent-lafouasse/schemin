@@ -17,8 +17,8 @@
 (define (sum-of-squares a b)
   (+ (* a a) (* b b)))
 
-; if tasked to do the same with a list i would probably sort it first. for 3
-; hardcoded arguments this is fine
+; if tasked to do the same with a list i would probably sort it first
+; for 3 hardcoded arguments this is fine
 (define (sum-of-squares-larger a b c)
   (cond ((and (< a b) (< a c)) (sum-of-squares b c)) ; a is min
         ((< b c)               (sum-of-squares a c)) ; b is min
