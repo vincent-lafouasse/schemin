@@ -1,10 +1,15 @@
+(load "maybe/maybe.scm")
+
 ;;; accessors
 
-(define (first my-list) (car my-list))
+(define (first my-list)
+  (if (null? my-list)
+       (maybe/nothing)
+       (maybe/just (car my-list))))
 
 (define (last my-list)
-  (cond ((null? my-list)       '())
-        ((null? (cdr my-list)) (car my-list))
+  (cond ((null? my-list)       (maybe/nothing))
+        ((null? (cdr my-list)) (maybe/just (car my-list)))
         (else                  (last (cdr my-list)))))
 
 (define (len my-list)
