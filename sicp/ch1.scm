@@ -5,9 +5,11 @@
 
 ; 1.2 translate an expression
 
-(let ((numerator-term (+ 5 4 (- 2 (- 3 (+ 6 (/ 4 5))))))
-      (divisor-term   (* 3 (- 6 2) (- 2 7))))
-  (/ numerator-term divisor-term))
+(define this-expression (/ (+ 5 4 (- 2 (- 3 (+ 6 (/ 4 5)))))
+                           (* 3 (- 6 2) (- 2 7))))
+
+(assert-eq this-expression (- (/ 37 150)))
+
 
 ; 1.3 Define a procedure that takes three numbers as arguments and returns the sum of the squares of the two larger numbers
 
