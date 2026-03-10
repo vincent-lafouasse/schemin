@@ -32,11 +32,11 @@
 
 (define (list/reverse lst) (list/fold-left (lambda (acc e) (cons e acc)) '() lst))
 
-(define (list/sum lst) (fold-left + 0 lst))
+(define (list/sum lst) (list/fold-left + 0 lst))
 
-(define (len-also lst) (fold-left (lambda (acc _) (+ 1 acc))
-                                  0
-                                  lst))
+(define (list/len-also lst) (list/fold-left (lambda (acc _) (+ 1 acc))
+                                            0
+                                            lst))
 
 ;;; "mutators"
 
