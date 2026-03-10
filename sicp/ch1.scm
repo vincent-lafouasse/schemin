@@ -1,9 +1,9 @@
 (load "assert.scm")
 
-; 1.1 brain compile some expressions
+;;;; 1.1 brain compile some expressions
 ; not worth writing down
 
-; 1.2 translate an expression
+;;;; 1.2 translate an expression
 
 (define this-expression (/ (+ 5 4 (- 2 (- 3 (+ 6 (/ 4 5)))))
                            (* 3 (- 6 2) (- 2 7))))
@@ -11,7 +11,8 @@
 (assert-eq this-expression (- (/ 37 150)))
 
 
-; 1.3 Define a procedure that takes three numbers as arguments and returns the sum of the squares of the two larger numbers
+;;;; 1.3 Define a procedure that takes three numbers as arguments and returns
+; the sum of the squares of the two larger numbers
 
 (define (sum-of-squares a b)
   (+ (* a a) (* b b)))
@@ -26,7 +27,7 @@
 (assert-eq (sum-of-squares-larger -1 -67 1) 2)
 (assert-eq (sum-of-squares-larger -1 1 -67) 2)
 
-; 1.4 describe the following expression
+;;;; 1.4 describe the following expression
 
 (define (a-plus-abs-b a b)
   ((if (> b 0) + -) a b))
@@ -37,7 +38,7 @@
 ;
 ; this is indeed a-plus-abs-b
 
-; 1.5 applicative-order vs norma-order
+;;;; 1.5 applicative-order vs normal-order
 ; in each case what happens if we do:
 
 (define (p) (p))  ; infinite loop
