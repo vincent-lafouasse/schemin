@@ -4,7 +4,9 @@
 (define-syntax assert-eq
   (syntax-rules ()
     ( ; the first and only use pattern recognized
-      (_ expected-expr actual-expr) ; we want 2 arguments. bind them to these names
+      ; the use pattern is defined as below.
+      ; we want 2 arguments. bind them to these names
+      (_ expected-expr actual-expr)
 
       ; when encountering the macro, replace with:
       (
