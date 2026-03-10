@@ -25,6 +25,7 @@
             (display " => ")
             (display actual-value)
             (newline)
+            ; exiting is fine, this is meant for batch mode not interactive mode
             (exit 1)
         ))
       )
