@@ -1,4 +1,5 @@
 (load "maybe/maybe.scm")
+(load "assert.scm")
 
 ;;; accessors
 
@@ -42,3 +43,13 @@
 
 (define (list/push-front element lst)
   (cons element lst))
+
+;;; tests
+
+(define (list/tests) (begin
+  (assert-eq 1 1)
+
+  (display "-- everything ok\n")
+))
+
+#;(list/tests)
