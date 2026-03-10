@@ -47,9 +47,23 @@
 ;;; tests
 
 (define (list/tests) (begin
-  (assert-eq 1 1)
+  (assert-eq (list/first '())    (maybe/nothing))
+  (assert-eq (list/first '(67))  (maybe/just 67))
+  (assert-eq (list/first '(1 2)) (maybe/just 1))
+
+  (assert-eq (list/last '())    (maybe/nothing))
+  (assert-eq (list/last '(67))  (maybe/just 67))
+  (assert-eq (list/last '(1 2)) (maybe/just 2))
+
+  (assert-eq (list/len '())    0)
+  (assert-eq (list/len '(67))  1)
+  (assert-eq (list/len '(1 2)) 2)
+
+  (assert-eq (list/len-also '())    0)
+  (assert-eq (list/len-also '(67))  1)
+  (assert-eq (list/len-also '(1 2)) 2)
 
   (display "-- everything ok\n")
 ))
 
-#;(list/tests)
+(list/tests)
