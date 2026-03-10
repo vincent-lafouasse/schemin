@@ -8,10 +8,13 @@
 
 (define (maybe/nothing? maybe) (eq? (car maybe) 'nothing))
 
-(define (maybe/unwrap maybe)
+(define (maybe/expect maybe message)
   (if (maybe/just? maybe)
       (cadr maybe)
-      (error "tried to unwrap nothing value")))
+      (error message)))
+
+
+(define (maybe/unwrap maybe) (maybe/expect maybe "tried to unwrap nothing value"))
 
 (define (maybe/unwrap-or maybe default)
   (if (maybe/just? maybe)
