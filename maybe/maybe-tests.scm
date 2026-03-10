@@ -6,7 +6,7 @@
     (
       ; define the use pattern
       ; we want 2 arguments. bind them to these names
-      (_ expected-expr actual-expr)
+      (_ actual-expr expected-expr)
 
       ; when encountering the macro, replace with:
       (
