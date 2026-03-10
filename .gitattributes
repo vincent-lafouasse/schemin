@@ -1,1 +1,3 @@
 **/*.scm linguist-language=Scheme
+sicp/* linguist-vendored=false
+sicp/* linguist-documentation=false
