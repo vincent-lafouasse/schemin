@@ -1,30 +1,30 @@
 ; an option type
 
-(define (just x) (list 'just x))
+(define (maybe/just x) (list 'just x))
 
-(define (nothing) (list 'nothing))
+(define (maybe/nothing) (list 'nothing))
 
-(define (just? maybe) (eq? (car maybe) 'just))
+(define (maybe/just? maybe) (eq? (car maybe) 'just))
 
-(define (nothing? maybe) (eq? (car maybe) 'nothing))
+(define (maybe/nothing? maybe) (eq? (car maybe) 'nothing))
 
-(define (unwrap maybe)
-  (if (just? maybe)
+(define (maybe/unwrap maybe)
+  (if (maybe/just? maybe)
       (cadr maybe)
       (error "tried to unwrap nothing value")))
 
-(define (unwrap-or maybe default)
-  (if (just? maybe)
-      (unwrap maybe)
+(define (maybe/unwrap-or maybe default)
+  (if (maybe/just? maybe)
+      (maybe/unwrap maybe)
       default))
 
-(define (maybe-map maybe f)
-  (if (just? maybe)
-      (f (unwrap maybe))
-      (nothing)))
+(define (maybe/map maybe f)
+  (if (maybe/just? maybe)
+      (f (maybe/unwrap maybe))
+      (maybe/nothing)))
 
 
-(define (maybe-filter maybe pred?)
-  (cond ((nothing? maybe)       (nothing))
-        ((pred? (unwrap maybe)) maybe)
-        (else                   (nothing))))
+(define (maybe/filter maybe pred?)
+  (cond ((maybe/nothing? maybe)       (maybe/nothing))
+        ((pred? (maybe/unwrap maybe)) maybe)
+        (else                         (maybe/nothing))))
