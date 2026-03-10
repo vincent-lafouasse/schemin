@@ -22,7 +22,7 @@
 
 ; `combine` is a binary operator that combines the accumulator with the current element
 ; next-accumulator = (combine accumulator element)
-(define (list/fold-left lst combine init)
+(define (list/fold-left combine init lst)
   (define (iter lst acc)
     (if (null? lst)
         acc
@@ -30,13 +30,13 @@
 
   (iter lst init))
 
-(define (list/reverse lst) (list/fold-left lst (lambda (acc e) (cons e acc)) '()))
+(define (list/reverse lst) (list/fold-left (lambda (acc e) (cons e acc)) '() lst))
 
-(define (list/sum lst) (fold-left lst + 0))
+(define (list/sum lst) (fold-left + 0 lst))
 
-(define (len-also lst) (fold-left lst
-                                  (lambda (acc _) (+ 1 acc))
-                                  0))
+(define (len-also lst) (fold-left (lambda (acc _) (+ 1 acc))
+                                  0
+                                  lst))
 
 ;;; "mutators"
 
