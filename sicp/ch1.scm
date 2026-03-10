@@ -53,3 +53,22 @@
 ; > Scheme procedures are evaluated when the procedure is applied. In contrast,
 ; > normal-order languages delay evaluation of procedure arguments until the
 ; > actual argument values are needed.
+
+; in normal order the arguments to procedures are lazily evaluated while in
+; applicative order. they are eagerly evaluated
+;
+; here in particular, (p) can never be evaluated but it doesn't have to be
+
+; so in normal order,
+(test 0 (p))       ; test is expanded without ever evaluating its arguments
+(if (= 0 0) 0 (p)) ; the (p) branch is not taken
+0                  ; (p) is never evaluated
+
+; (p) never has to be evaluated
+
+; in applicative order the arguments to test are always evaluated
+; equivalently to
+
+(let ((x 0)
+      (y (p))) ; hangs
+  (test x y))  ; will never happen
