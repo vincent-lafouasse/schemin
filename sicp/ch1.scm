@@ -1,3 +1,5 @@
+(load "assert.scm")
+
 ; 1.1 brain compile some expressions
 ; not worth writing down
 
@@ -9,5 +11,15 @@
 
 ; 1.3 Define a procedure that takes three numbers as arguments and returns the sum of the squares of the two larger numbers
 
-(let ((sum-of-squares (lambda (a b) (+ (* a a) (* b b)))))
-  (sum-of-squares 1 2))
+(define (sum-of-squares a b)
+  (+ (* a a) (* b b)))
+
+(define (sum-of-squares-larger a b c)
+  (cond ((and (< a b) (< a c)) (sum-of-squares b c)) ; a is min
+        ((< b c)               (sum-of-squares a c)) ; b is min
+        (else                  (sum-of-squares a b)) ; c is min
+        ))
+
+(assert-eq (sum-of-squares-larger -67 -1 1) 2)
+(assert-eq (sum-of-squares-larger -1 -67 1) 2)
+(assert-eq (sum-of-squares-larger -1 1 -67) 2)
