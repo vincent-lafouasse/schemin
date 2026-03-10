@@ -47,4 +47,9 @@
 (define (test x y)
   (if (= x 0) 0 y))
 
-; hmmm
+(test 0 (p))
+
+; > Scheme is an applicative-order language, namely, that all the arguments to
+; > Scheme procedures are evaluated when the procedure is applied. In contrast,
+; > normal-order languages delay evaluation of procedure arguments until the
+; > actual argument values are needed.
