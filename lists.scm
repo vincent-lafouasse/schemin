@@ -2,17 +2,17 @@
 
 ;;; accessors
 
-(define (first lst)
+(define (list/first lst)
   (if (null? lst)
        (maybe/nothing)
        (maybe/just (car lst))))
 
-(define (last lst)
+(define (list/last lst)
   (cond ((null? lst)       (maybe/nothing))
         ((null? (cdr lst)) (maybe/just (car lst)))
-        (else              (last (cdr lst)))))
+        (else              (list/last (cdr lst)))))
 
-(define (len lst)
+(define (list/len lst)
   (define (iter lst acc)
     (if (null? lst)
         acc
@@ -22,7 +22,7 @@
 
 ; `combine` is a binary operator that combines the accumulator with the current element
 ; next-accumulator = (combine accumulator element)
-(define (foldl lst combine init)
+(define (list/foldl lst combine init)
   (define (iter lst acc)
     (if (null? lst)
         acc
@@ -30,7 +30,7 @@
 
   (iter lst init))
 
-(define (sum-list lst) (foldl lst + 0))
+(define (list/sum lst) (foldl lst + 0))
 
 (define (len-also lst) (foldl lst
                               (lambda (acc _) (+ 1 acc))
@@ -38,5 +38,5 @@
 
 ;;; "mutators"
 
-(define (push-front element lst)
+(define (list/push-front element lst)
   (cons element lst))
