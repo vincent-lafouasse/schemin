@@ -68,6 +68,10 @@
   (assert-eq (list/sum '(67))  67)
   (assert-eq (list/sum '(1 2)) 3)
 
+  (assert-eq (list/reverse '())    '())
+  (assert-eq (list/reverse '(67))  '(67))
+  (assert-eq (list/reverse '(1 2)) '(2 1))
+
   (display (colorize color/green "-- everything ok\n"))
 ))
 
