@@ -63,6 +63,10 @@
   (assert-eq (list/len-also '(67))  1)
   (assert-eq (list/len-also '(1 2)) 2)
 
+  (assert-eq (list/sum '())    0)
+  (assert-eq (list/sum '(67))  67)
+  (assert-eq (list/sum '(1 2)) 3)
+
   (display "-- everything ok\n")
 ))
 
