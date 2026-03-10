@@ -25,3 +25,14 @@
 (assert-eq (sum-of-squares-larger -67 -1 1) 2)
 (assert-eq (sum-of-squares-larger -1 -67 1) 2)
 (assert-eq (sum-of-squares-larger -1 1 -67) 2)
+
+; 1.4 describe the following expression
+
+(define (a-plus-abs-b a b)
+  ((if (> b 0) + -) a b))
+
+; we either addition or subtract b from a depending on the sign of b
+; if b is positive, this evaluates to a + b ie a + abs(b)
+; else            , this evaluates to a - b ie a + abs(b)
+;
+; this is indeed a-plus-abs-b
