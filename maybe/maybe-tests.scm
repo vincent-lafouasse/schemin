@@ -20,7 +20,7 @@
             (display " => ")
             (display expected-value)
             (newline)
-            (display "--   actual: ")
+            (display "--   actual:   ")
             (display 'actual-expr)
             (display " => ")
             (display actual-value)
