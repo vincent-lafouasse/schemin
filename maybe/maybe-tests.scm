@@ -2,9 +2,9 @@
 
 ; do not come at me for the non standard formatting i do not care
 (define-syntax assert-eq
-  (syntax-rules ()
-    ( ; the first and only use pattern recognized
-      ; the use pattern is defined as below.
+  (syntax-rules () ; following is as many forms as use patterns we recognize. we only recognize 1
+    (
+      ; define the use pattern
       ; we want 2 arguments. bind them to these names
       (_ expected-expr actual-expr)
 
