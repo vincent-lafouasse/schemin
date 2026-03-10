@@ -1,3 +1,5 @@
+(load "color.scm")
+
 ; do not come at me for the non standard formatting i do not care
 (define-syntax assert-eq
   (syntax-rules () ; following is as many forms as use patterns we recognize. we only recognize 1
@@ -13,16 +15,16 @@
 
         (if (not (equal? expected-value actual-value))
           (begin
-            (display "-- assertion failed")
+            (display (colorize color/red "-- assertion failed"))
             (newline)
-            (display "--   expected: ")
+            (display (colorize color/green "--   expected: "))
             (display 'expected-expr) ; the quote means: do not evaluate, just print the S-expression
-            (display " => ")
+            (display (colorize color/yellow " => "))
             (display expected-value) ; this is the value
             (newline)
-            (display "--   actual:   ")
+            (display (colorize color/red "--   actual:   "))
             (display 'actual-expr)
-            (display " => ")
+            (display (colorize color/yellow " => "))
             (display actual-value)
             (newline)
             ; exiting is fine, this is meant for batch mode not interactive mode
