@@ -2,41 +2,41 @@
 
 ;;; accessors
 
-(define (first my-list)
-  (if (null? my-list)
+(define (first lst)
+  (if (null? lst)
        (maybe/nothing)
-       (maybe/just (car my-list))))
+       (maybe/just (car lst))))
 
-(define (last my-list)
-  (cond ((null? my-list)       (maybe/nothing))
-        ((null? (cdr my-list)) (maybe/just (car my-list)))
-        (else                  (last (cdr my-list)))))
+(define (last lst)
+  (cond ((null? lst)       (maybe/nothing))
+        ((null? (cdr lst)) (maybe/just (car lst)))
+        (else              (last (cdr lst)))))
 
-(define (len my-list)
-  (define (iter my-list acc)
-    (if (null? my-list)
+(define (len lst)
+  (define (iter lst acc)
+    (if (null? lst)
         acc
-        (iter (cdr my-list) (+ 1 acc))))
+        (iter (cdr lst) (+ 1 acc))))
 
-  (iter my-list 0))
+  (iter lst 0))
 
 ; `combine` is a binary operator that combines the accumulator with the current element
 ; next-accumulator = (combine accumulator element)
-(define (foldl my-list combine init)
-  (define (iter my-list acc)
-    (if (null? my-list)
+(define (foldl lst combine init)
+  (define (iter lst acc)
+    (if (null? lst)
         acc
-        (iter (cdr my-list) (combine acc (car my-list)))))
+        (iter (cdr lst) (combine acc (car lst)))))
 
-  (iter my-list init))
+  (iter lst init))
 
-(define (sum-list my-list) (foldl my-list + 0))
+(define (sum-list lst) (foldl lst + 0))
 
-(define (len-also my-list) (foldl my-list
-                                  (lambda (acc _) (+ 1 acc))
-                                  0))
+(define (len-also lst) (foldl lst
+                              (lambda (acc _) (+ 1 acc))
+                              0))
 
 ;;; "mutators"
 
-(define (push-front element my-list)
-  (cons element my-list))
+(define (push-front element lst)
+  (cons element lst))
