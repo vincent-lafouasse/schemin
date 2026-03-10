@@ -30,6 +30,8 @@
 
   (iter lst init))
 
+(define (list/reverse lst) (list/foldl lst (lambda (acc e) (cons e acc)) '()))
+
 (define (list/sum lst) (foldl lst + 0))
 
 (define (len-also lst) (foldl lst
