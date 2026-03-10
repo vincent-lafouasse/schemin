@@ -20,7 +20,7 @@
 
 (define (maybe/map maybe f)
   (if (maybe/just? maybe)
-      (f (maybe/unwrap maybe))
+      (maybe/just (f (maybe/unwrap maybe)))
       (maybe/nothing)))
 
 
