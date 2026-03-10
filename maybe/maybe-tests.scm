@@ -25,7 +25,7 @@
             (display " => ")
             (display actual-value)
             (newline)
-            (error "assertion failed")
+            (exit 1)
         ))
       )
     )))
@@ -41,3 +41,5 @@
 (assert-eq (nothing? (just 3))    #f)
 (assert-eq (nothing? (just "67")) #f)
 (assert-eq (nothing? (nothing))   #t)
+
+(display "-- everything ok\n")
