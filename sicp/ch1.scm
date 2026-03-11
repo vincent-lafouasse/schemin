@@ -367,19 +367,57 @@ constexpr bool approximatelyEqual (Type a, Type b,
 
 ; now to do an iterative version
 ;
-; let's remind ourselves what a first order iterative process looks like.
 ; we're gonna need an accumulator. another way to view this accumulator is that
 ; it carries previous state forward. it's as much a delay buffer as it is an
 ; accumulator.
 ;
-; we'll call the accumulator prev to emphasize that
+; we need z^-3 so we need 3 delay buffers.
+;
+; actually let's do it imperatively and identify those 3 buffers. iterative
+; processes describe their arguments as being the state they carry to move the
+; computation forward, this state being _all_ we need to continue
 
-(define (triangle n)
-  (define (iter n prev)
-    (if (= n 0)
-        prev
-        ()
-        ))
+#|
+int f(int n) {
+    if (n < 3) {
+        return n;
+    }
 
-  (iter something))
+    int head = 2; // f(2) at first, our return value when the computation is done
+    int prev = 1;
+    int prevprev = 0;
 
+    while (n >= 3) {
+        // all these assigments are just gonna be argument passing
+        int new_head = current + 2*prev + 3*prevprev;
+        prevprev = prev;
+        prev = current;
+        head = new_head;
+
+        // this is the counter that will dictate the exit point/base case
+        // it is also necessary state
+        n--;
+    }
+
+    return head;
+}
+|#
+
+(define (f-imperative n)
+  (define (iter n head prev prevprev)
+    (if (< n 3)
+        head
+        (let ((new-head (+ head
+                           (* 2 prev)
+                           (* 3 prevprev))))
+          (iter (- n 1) new-head head prev))))
+
+  (if (< n 3)
+      n
+      (iter n 2 1 0)))
+
+(assert-eq (f-imperative -1) -1)
+(assert-eq (f-imperative 0)  0)
+(assert-eq (f-imperative 1)  1)
+(assert-eq (f-imperative 2)  2)
+(assert-eq (f-imperative 3)  4)
