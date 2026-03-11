@@ -39,6 +39,9 @@
 ; else            , this evaluates to a - b ie a + abs(b)
 ;
 ; this is indeed a-plus-abs-b
+;
+; we note that procedures (which + and - are) are just values and we can swap
+; them around as we would integers
 
 ;;;; 1.5 applicative-order vs normal-order
 ; in each case what happens if we do:
