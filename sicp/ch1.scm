@@ -368,7 +368,9 @@ constexpr bool approximatelyEqual (Type a, Type b,
 ; now to do an iterative version
 ;
 ; let's remind ourselves what a first order iterative process looks like.
-; we're gonna need an accumulator. another way to view this accumulator is that it carries previous state forward. it's as much a delay buffer as an accumulator.
+; we're gonna need an accumulator. another way to view this accumulator is that
+; it carries previous state forward. it's as much a delay buffer as it is an
+; accumulator.
 ;
 ; we'll call the accumulator prev to emphasize that
 
