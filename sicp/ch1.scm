@@ -279,3 +279,65 @@ constexpr bool approximatelyEqual (Type a, Type b,
 
 ; no pending stack frames. this process is iterative
 ; with guaranteed TCO go nuts and add large numbers (but maybe be prepared to wait)
+
+;;;; 1.10 Ackermann's function and what it can compute (supposedly a lot)
+
+(define (A x y)
+  (cond ((= y 0) 0)
+        ((= x 0) (* 2 y))
+        ((= y 1) 2)
+        (else (A (- x 1) (A x (- y 1))))))
+
+; > What are the values of the following expressions ?
+(A 1 10)
+(A 2 4)
+(A 3 3)
+
+; alright time to brain compile, looking out for any of them equalling 0, and for y equalling 1
+
+(A 1 10)
+(A (- 1 1) (A 1 (- 10 1)))
+(A 0 (A 1 9)) ; base case
+
+(* 2 (A 1 9))
+
+(* 2 (A (- 1 1) (A 1 (- 9 1))))
+(* 2 (A 0 (A 1 8)))
+(* 4 (A 1 8))
+
+; ok i see the pattern
+(* (pow 2 2) (A 1 8))
+(* (pow 2 3) (A 1 7))
+(* (pow 2 4) (A 1 6))
+(* (pow 2 5) (A 1 5))
+(* (pow 2 6) (A 1 4))
+(* (pow 2 7) (A 1 3))
+(* (pow 2 8) (A 1 2))
+(* (pow 2 9) (A 1 1)) ; base case
+
+(* (pow 2 9) 2)
+(pow 2 10) ; 1024 as expected
+
+; so (A 1 n) is 2^n
+
+; let's keep going
+(A 2 4)
+(A 1 (A 2 3))
+
+; since (A 1 n) is (pow 2 n)
+
+(pow 2 (A 2 3))
+(pow 2 (pow 2 (A 2 2)))
+(pow 2 (pow 2 (pow 2 (A 2 1)))) ; base case
+
+(pow 2 (pow 2 (pow 2 2)))
+
+; that's 2^16 ie 64Ki
+
+; so (A 2 n) is 2^2^...^2 with n 2's in there
+; i.e. 2↑↑4 (tetration)
+
+; so finally:
+; (A 0 n) = 2n,   i.e. 2+2+...+2 with n 2's in there
+; (A 1 n) = 2^n,  i.e. 2*2*...*2 with n 2's in there
+; (A 2 n) = 2↑↑n, i.e. 2^2^...^2 with n 2's in there
