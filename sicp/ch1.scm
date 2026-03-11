@@ -340,7 +340,7 @@ constexpr bool approximatelyEqual (Type a, Type b,
 ; so (A 2 n) is 2^2^...^2 with n 2's in there
 ; i.e. 2↑↑4 (tetration)
 
-; so finally:
+; so finally to answer the question
 ; (A 0 n) = 2n,   i.e. 2+2+...+2 with n 2's in there
 ; (A 1 n) = 2^n,  i.e. 2*2*...*2 with n 2's in there
 ; (A 2 n) = 2↑↑n, i.e. 2^2^...^2 with n 2's in there
