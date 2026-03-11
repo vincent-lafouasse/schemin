@@ -127,12 +127,14 @@
 ;
 ; without scaling, a tolerance of 0.000001 can be literally impossible to reach
 ; as the distance between 2 successive floats gets bigger
-; next(1000000000.0) - 1000000000.0 is probably larger than 1.0 let alone 0.00001
+; next(1000000000.0) - 1000000000.0 is many many orders of magnitude larger than the (next 0.0)
 
 ; the answer is to not constrain dX to a small number but dX/X
 (define (distance x y) (abs (- x y)))
 
-(define tolerance 0.001) ; 1:1000 should be plenty close enough. i've done chemistry with way worse approximations 
+; 1:1000 should be plenty close enough. i've done way worse chemistry and i dare
+; you to measure 5mg of powder within 1:1000
+(define tolerance 0.001)
 
 (define (close-enough? x y)
   (< (/ (distance x y) (abs x))
