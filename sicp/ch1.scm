@@ -344,3 +344,43 @@ constexpr bool approximatelyEqual (Type a, Type b,
 ; (A 0 n) = 2n,   i.e. 2+2+...+2 with n 2's in there
 ; (A 1 n) = 2^n,  i.e. 2*2*...*2 with n 2's in there
 ; (A 2 n) = 2↑↑n, i.e. 2^2^...^2 with n 2's in there
+
+;;;; 1.11 a recursive function
+; given the function
+; f : n -> n if n <3
+;          f(n-1) + 2f(n-2) + 3f(n-3) otherwise
+;
+; write procedures that compute f by means of a recursive and iterative processes
+
+; a naive implementation leads to the tail call being an addition, naturally
+; leading to a recursive process.
+; let's start with that
+
+(define (f-recursive n)
+  (if (< n 3)
+      n
+      (+ (f-recursive (- n 1))
+         (* 2 (f-recursive (- n 2)))
+         (* 3 (f-recursive (- n 3))))))
+
+(f-recursive 3)
+
+; now to do an iterative version, we could do matrix multiplication.
+;
+; let's take fibonacci, devise the matrix multiplication and see from there.
+;
+; let X[n] = (fib(n) fib(n-1))
+;
+; given X[n], we can construct X[n+1] because:
+; X[n+1][0] = fib(n+1) = fib(n) + fib(n-1)
+; X[n+1][0] = X[n][0] + X[n][1]
+;
+; and trivially,
+; X[n+1][1] = fib(n) = X[n][0]
+;
+; i.e.
+; X[n+1] = ( 1 1  x X[n]
+;            1 0 )
+;
+; so starting from the base case, fibonacci is "just" an accumulation of matrix
+; products
