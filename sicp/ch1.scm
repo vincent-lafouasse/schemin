@@ -1,5 +1,9 @@
 (load "assert.scm")
 
+; ---- 1. Building Abstractions with Procedures
+
+; ---- 1.1 The Elements of Programming
+
 ;;;; 1.1 brain compile some expressions
 ; not worth writing down
 
@@ -205,3 +209,5 @@ constexpr bool approximatelyEqual (Type a, Type b,
 
 (cube-root-monitored 27.0) ; => (3.0000005410641766 7)
 ; pretty nice
+
+; ---- 1.2 Procedures and the Processes They Generate
