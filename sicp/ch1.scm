@@ -365,22 +365,19 @@ constexpr bool approximatelyEqual (Type a, Type b,
 
 (f-recursive 3)
 
-; now to do an iterative version, we could do matrix multiplication.
+; now to do an iterative version
 ;
-; let's take fibonacci, devise the matrix multiplication and see from there.
+; let's remind ourselves what a first order iterative process looks like.
+; we're gonna need an accumulator. another way to view this accumulator is that it carries previous state forward. it's as much a delay buffer as an accumulator.
 ;
-; let X[n] = (fib(n) fib(n-1))
-;
-; given X[n], we can construct X[n+1] because:
-; X[n+1][0] = fib(n+1) = fib(n) + fib(n-1)
-; X[n+1][0] = X[n][0] + X[n][1]
-;
-; and trivially,
-; X[n+1][1] = fib(n) = X[n][0]
-;
-; i.e.
-; X[n+1] = ( 1 1  x X[n]
-;            1 0 )
-;
-; so starting from the base case, fibonacci is "just" an accumulation of matrix
-; products
+; we'll call the accumulator prev to emphasize that
+
+(define (triangle n)
+  (define (iter n prev)
+    (if (= n 0)
+        prev
+        ()
+        ))
+
+  (iter something))
+
