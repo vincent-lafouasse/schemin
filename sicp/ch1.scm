@@ -112,3 +112,31 @@
 (coolest-if #t
             (lambda () 'ok)
             (lambda () (destroy-the-world)))
+
+;;;; 1.7 why is this terrible ?
+
+(define (close-enough? x y) (< (abs (- x y)) 0.00001))
+
+; we have a problem because a fixed tolerance falls apart for arbitrary small
+; numbers as the ratio value/tolerance starts getting too small.
+;
+; in a world of infinite precision (e.g. non QM physics) the tolerance should scale with the values.
+;
+; in the IEEE world, a tolerance of (next 0.0) is the best we can get for small numbers (but way too drastic)
+; however even with real world floats we still have problems for large numbers.
+;
+; without scaling, a tolerance of 0.000001 can be literally impossible to reach
+; as the distance between 2 successive floats gets bigger
+; next(1000000000.0) - 1000000000.0 is probably larger than 1.0 let alone 0.00001
+
+; the answer is to not constrain dX to a small number but dX/X
+(define (distance x y) (abs (- x y)))
+
+(define tolerance 0.001) ; 1:1000 should be plenty close enough. i've done chemistry with way worse approximations 
+
+(define (close-enough? x y)
+  (< (/ (distance x y) (abs x))
+     tolerance))
+; we could divide by x or y, it shouldn't matter if they're close
+; a more principled approach would probably average them in some way
+; and we could probably add an epsilon to (abs x) to avoid division by 0
