@@ -255,7 +255,8 @@ constexpr bool approximatelyEqual (Type a, Type b,
 9
 
 ; the tower of incs is a direct representation of the stack frames building up
-; and down. this is a recursive process
+; and down. this is a recursive process. put anything large in the first
+; argument and you will blow up your stack
 
 (add2 4 5)
 (if (= 4 0)
@@ -277,3 +278,4 @@ constexpr bool approximatelyEqual (Type a, Type b,
 9
 
 ; no pending stack frames. this process is iterative
+; with guaranteed TCO go nuts and add large numbers (but maybe be prepared to wait)
