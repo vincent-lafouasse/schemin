@@ -165,3 +165,43 @@ constexpr bool approximatelyEqual (Type a, Type b,
         || diff <= tolerance.getRelative() * std::max (std::abs (a), std::abs (b));
 }
 |#
+
+;;;; 1.8 Newton but for cube roots
+; > Newton's method for cube roots is based on the fact that if y is an
+; > approximation to the cube root of x, then a better approximation is given by
+; > the value (x/y^2 + 2y)/3.
+; >
+; > Use this formula to implement a cube-root procedure analogous to the
+; > square-root procedure.
+
+(define (better-guess x guess)
+  (/ (+ (/ x (* guess guess))
+        (* 2 guess))
+     3))
+
+; we'll reuse this, we just won't pass 0
+(define (close-enough? x y)
+  (< (/ (distance x y) (abs x))
+     0.001))
+
+(define (cube-root x)
+  (define (iter guess)
+    (if (close-enough? x (* guess guess guess))
+        guess
+        (iter (better-guess x guess))))
+
+  (iter 1.0))
+
+(cube-root 27.0) ; => 3.0000005410641766
+
+; because why not, let's count the number of iterations it took to get there
+(define (cube-root-monitored x)
+  (define (iter guess iteration)
+    (if (close-enough? x (* guess guess guess))
+        (list guess iteration)
+        (iter (better-guess x guess) (+ 1 iteration))))
+
+  (iter 1.0 0))
+
+(cube-root-monitored 27.0) ; => (3.0000005410641766 7)
+; pretty nice
