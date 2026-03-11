@@ -138,17 +138,20 @@
 
 ; the answer is to not constrain dX to a small number but dX/X
 (define (distance x y) (abs (- x y)))
+(define (relative-distance x y reference)
+  (/ (distance x y)
+     (abs reference)))
 
 ; 1:1000 should be plenty close enough. i've done way worse chemistry and i dare
 ; you to measure 5mg of powder within 1:1000
 (define tolerance 0.001)
 
 (define (close-enough? x y)
-  (< (/ (distance x y) (abs x))
+  (< (relative-distance x y x)
      tolerance))
-; we could divide by x or y, it shouldn't matter if they're close
-; a more principled approach would probably average them in some way
-; and we could probably add an epsilon to (abs x) to avoid division by 0
+; we could use x or y as reference, it shouldn't matter if they're close
+; a more principled approach would probably average them in some way and we could
+; probably add an epsilon to the reference to avoid division by 0
 ;
 ; the recommended implementation is usually to use a fixed epsilon for small
 ; floats, and a scaling epsilon for large floats
@@ -185,7 +188,7 @@ constexpr bool approximatelyEqual (Type a, Type b,
 
 ; we'll reuse this, we just won't pass 0
 (define (close-enough? x y)
-  (< (/ (distance x y) (abs x))
+  (< (relative-distance x y x)
      0.001))
 
 (define (cube-root x)
