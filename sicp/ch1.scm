@@ -145,3 +145,19 @@
 ;
 ; the recommended implementation is usually to use a fixed epsilon for small
 ; floats, and a scaling epsilon for large floats
+; here's a C++ implementation from JUCE that does tries both
+#|
+constexpr bool approximatelyEqual (Type a, Type b,
+                                   Tolerance<Type> tolerance = Tolerance<Type>{}
+                                        .withAbsolute (std::numeric_limits<Type>::min())
+                                        .withRelative (std::numeric_limits<Type>::epsilon()))
+{
+    if (! (juce_isfinite (a) && juce_isfinite (b)))
+        return exactlyEqual (a, b);
+
+    const auto diff = std::abs (a - b);
+
+    return diff <= tolerance.getAbsolute()
+        || diff <= tolerance.getRelative() * std::max (std::abs (a), std::abs (b));
+}
+|#
