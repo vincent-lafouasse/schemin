@@ -44,6 +44,8 @@
 ; in each case what happens if we do:
 
 (define (p) (p))  ; infinite loop
+(define (p) (error "don't do that")) ; actually don't kill my REPL please
+
 (define (test x y)
   (if (= x 0) 0 y))
 
