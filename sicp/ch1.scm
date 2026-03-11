@@ -145,6 +145,7 @@
 ;
 ; the recommended implementation is usually to use a fixed epsilon for small
 ; floats, and a scaling epsilon for large floats
+;
 ; here's a C++ implementation from JUCE that does tries both
 #|
 constexpr bool approximatelyEqual (Type a, Type b,
