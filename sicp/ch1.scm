@@ -78,3 +78,37 @@
 (let ((x 0)
       (y (p))) ; hangs
   (test x y))  ; will never happen
+
+;;;; 1.6 could we just rewrite `if` by wrapping a `cond` in a procedure ?
+
+(define (terrible-if predicate then-clause else-clause)
+  (cond (predicate then-clause)
+        (else else-clause)))
+
+; no the problem is that expressions have to pass through the terrible-if procedure
+; and hence will be eagerly evaluated
+
+(define (destroy-the-world) (error "you shall not pass"))
+
+(if #t 'ok (destroy-the-world))          ; this is fine
+(terrible-if #t 'ok (destroy-the-world)) ; this isn't
+
+; this would work tho. the cond does not evaluate branchs not taken and the
+; macro ensures everything is passed to cond as if we called it ourselves
+(define-syntax cool-if
+  (syntax-rules ()
+    ((_ pred? then-clause else-clause)
+     (cond (pred? then-clause)
+           (else else-clause)))))
+
+; or pass a thunk. thunks can be evaluated that's fine there're just functions
+; we just make sure to not call it, which the cond should take care of without fuss
+(define (coolest-if pred? then-thunk else-thunk)
+  (cond (pred? (then-thunk))
+        (else  (else-thunk))))
+
+; the world is safe
+(cool-if    #t 'ok (destroy-the-world))
+(coolest-if #t
+            (lambda () 'ok)
+            (lambda () (destroy-the-world)))
