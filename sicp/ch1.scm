@@ -234,7 +234,7 @@ constexpr bool approximatelyEqual (Type a, Type b,
 
 ; my first instinct is that add1 is not tail recursive. hence when doing (+ 1
 ; (add1 ...)) it has to hold the value 1 in the stack frame until add1 is done.
-; In contrast, in add2 the tail call is the recursive calls. because of eager
+; In contrast, in add2 the tail call is the recursive call. because of eager
 ; evaluation, its operands will be evaluated first, leaving nothing in the
 ; stack frame of use.
 
