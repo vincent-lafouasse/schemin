@@ -140,3 +140,6 @@
 ; we could divide by x or y, it shouldn't matter if they're close
 ; a more principled approach would probably average them in some way
 ; and we could probably add an epsilon to (abs x) to avoid division by 0
+;
+; the recommended implementation is usually to use a fixed epsilon for small
+; floats, and a scaling epsilon for large floats
