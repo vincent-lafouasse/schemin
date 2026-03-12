@@ -421,3 +421,32 @@ int f(int n) {
 (assert-eq (f-imperative 1)  1)
 (assert-eq (f-imperative 2)  2)
 (assert-eq (f-imperative 3)  4)
+
+;;;; 1.12 the Pascal triangle
+; by means of a recursive process
+; asking for a recursive process and not to craft an iterative implementation
+; pushes me to just writing the naive version, ie to follow the mathematical
+; definition without trying to be clever about the machine
+
+; note: our base case is that the edges are always 1
+; i.e. if row == 0 || col == 0 || col == row
+
+(define (pascal row col)
+  (cond ((= row 0)   1)
+        ((= col 0)   1)
+        ((= col row) 1)
+        (else        (+ (pascal (- 1 row) col)
+                        (pascal (- 1 row) (+ 1 col))))))
+
+(assert-eq (pascal 0 0) 1)
+(assert-eq (pascal 1 0) 1)
+(assert-eq (pascal 2 0) 1)
+(assert-eq (pascal 2 2) 1)
+
+; i could have done a three-way || but who cares. with short-circuit evaluation
+; this is the same. i don't need to abstract the repeated 1's
+;
+; what is a better question is what happens if i ask for row=0 col=67. at the
+; moment i return 1 but either Maybe or (error) would work also. this isn't an
+; engineering book this is a theory of computation book, i don't really care
+; right now
