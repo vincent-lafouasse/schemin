@@ -432,7 +432,10 @@ int f(int n) {
 ; i.e. if row == 0 || col == 0 || col == row
 
 (define (pascal row col)
-  (cond ((= row 0)   1)
+  (cond ((< row 0)   (error "invalid row" row))
+        ((< col 0)   (error "invalid col" col))
+        ((> col row) (error "invalid col" col "for row" row))
+        ((= row 0)   1)
         ((= col 0)   1)
         ((= col row) 1)
         (else        (+ (pascal (- 1 row) col)
@@ -443,10 +446,8 @@ int f(int n) {
 (assert-eq (pascal 2 0) 1)
 (assert-eq (pascal 2 2) 1)
 
-; i could have done a three-way || but who cares. with short-circuit evaluation
-; this is the same. i don't need to abstract the repeated 1's
-;
-; what is a better question is what happens if i ask for row=0 col=67. at the
-; moment i return 1 but either Maybe or (error) would work also. this isn't an
-; engineering book this is a theory of computation book, i don't really care
-; right now
+(assert-eq (pascal 4 0) 1)
+(assert-eq (pascal 4 1) 4)
+(assert-eq (pascal 4 2) 6)
+(assert-eq (pascal 4 3) 4)
+(assert-eq (pascal 4 4) 1)
