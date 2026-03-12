@@ -487,9 +487,11 @@ int f(int n) {
 
 ; let X[n] be (phi^n - psi^n)/sqrt(5)
 ;
-; fib(0) is 0, X[0] is 0. good.
+; X[0] is 0, just like fib(0)
+; sqrt(5) * X[1] = phi - psi = 2 * sqrt(5)/2
+; i.e. X[1] = 1, just like fib(1)
 ;
-; let n such that fib(i) = X[i] for all i <= n.
+; let n > 1 such that fib(i) = X[i] for all i <= n.
 ;
 ; then fib(n+1) = fib(n) + fib(n-1) = X[n] + X[n-1]
 ; ie   sqrt(5) * fib(n+1) = phi^n + phi^(n-1) - psi^n - psi^(n-1)
