@@ -438,8 +438,11 @@ int f(int n) {
         ((= row 0)   1)
         ((= col 0)   1)
         ((= col row) 1)
-        (else        (+ (pascal (- 1 row) col)
-                        (pascal (- 1 row) (+ 1 col))))))
+        (else        (+ (pascal (- row 1) col)
+                        (pascal (- row 1) (- col 1))))))
+
+; i could have done a three-way || but who cares. with short-circuit evaluation
+; this is the same. i don't need to abstract the repeated 1's
 
 (assert-eq (pascal 0 0) 1)
 (assert-eq (pascal 1 0) 1)
