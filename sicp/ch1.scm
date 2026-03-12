@@ -505,4 +505,26 @@ int f(int n) {
 ;                    = phi^(n-1) * phi^2     - psi^(n-1) * psi^2
 ;                    = phi^(n+1)             - psi^(n+1)
 ;
-; i.e. fib(n+1) = X[n+1] 
+; i.e. fib(n+1) = X[n+1]
+; nice lemma, now let's continue into the main question
+;
+; notice that phi is greater than 1 and psi is less than 1
+; this means phi^n grows to infinity (supposedly approaching fib)
+; and that psi^n goes to 0 (pretty fast too)
+;
+; let u[n] = phi^n / sqrt(5)
+; let v[n] = psi^n / sqrt(5)
+; 
+; we have that
+; fib(n) = u[n] + o(1)
+; i.e. fib(n)/u[n] = 1 + o(1/phi^n) <- very very small
+;
+; in other words, fib(n) ~ u[n].
+; that is really really nice but not exactly what's asked
+;
+; however, having exposed v[n] as an error term and v[n] being strictly
+; decreasing, then the proposition "Fib(n) is the closest integer to u[n]" is
+; true starting from the point where v[n] < 1/2.
+; 1 / sqrt(5) = v[0] = 0.44 < 1/2
+;
+; the property is true for all n in N
