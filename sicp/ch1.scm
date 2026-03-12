@@ -528,3 +528,53 @@ int f(int n) {
 ; 1 / sqrt(5) = v[0] = 0.44 < 1/2
 ;
 ; the property is true for all n in N
+
+;;;; 1.29 Simpson's Rule
+
+(define (sum term lower upper next)
+  (define (iter lower acc)
+    (if (> lower upper)
+        acc
+        (iter (next lower) (+ acc (term lower)))))
+
+  (iter lower 0.0))
+
+(define (id x) x)
+(define (square x) (* x x))
+(define (cube x) (* x x x))
+
+(define (inc x) (+ 1 x))
+
+(assert-eq (sum square 0 3 inc) 14)
+
+(define (simpson-integral f a b n)
+  (define h (/ (- b a) n))
+
+  (define (coeff i)
+    (define (even? n) (= 0 (remainder n 2)))
+
+    (cond ((= i 0)   1)
+          ((= i n)   1)
+          ((even? i) 2)
+          (else      4)))
+
+  (define (term i) (f (+ a (* i h))))
+
+  (define (full-term i) (* h
+                           (/ 1 3)
+                           (coeff i)
+                           (term i)))
+  (sum full-term 0 n inc))
+
+(define pi 3.1415926535)
+
+(define (compose f g) (lambda (x) (f (g x))))
+
+(define pi-approx
+  (* 2
+     (simpson-integral (compose square cos)
+                       0
+                       pi
+                       10000)))
+
+(id pi-approx) ; => 3.141592653410205
