@@ -454,3 +454,53 @@ int f(int n) {
 (assert-eq (pascal 4 2) 6)
 (assert-eq (pascal 4 3) 4)
 (assert-eq (pascal 4 4) 1)
+
+;;;; 1.13 Fibonacci and the nombre d'or
+; > Prove that Fib(n) is the closest integer to phi^n/sqrt(5)
+; > where phi = (1 + sqrt(5))/2.
+;
+; > Hint: Let psi = (1 - sqrt(5))/2.
+;
+; > Use induction and the definition of the Fibonacci numbers
+; > to prove Fib(n) = (phi^n - psi^n)/sqrt(5)
+
+; hmmm phi is the greater solution of x^2 = x + 1, psi being the other one,
+; this has to be important
+;
+; we have that phi^2 = phi + 1, as well as psi^2 = psi + 1
+;
+; presumably this: Fib(n) = (phi^n - psi^n)/sqrt(5)
+; only works if (phi^n - psi^n) is an integer times sqrt(5). maybe even each
+; individually
+
+; ok hang on i just remembered what induction meant, ok let's just go at it
+; then
+;
+; let's remind ourselves of the definition of fibonacci
+
+(define (fib n)
+  (cond
+        ((= n 0) 0)
+        ((= n 1) 1)
+        (else    (+ (fib (- n 1))
+                    (fib (- n 2))))))
+
+; let X[n] be (phi^n - psi^n)/sqrt(5)
+;
+; fib(0) is 0, X[0] is 0. good.
+;
+; let n such that fib(i) = X[i] for all i <= n.
+;
+; then fib(n+1) = fib(n) + fib(n-1) = X[n] + X[n-1]
+; ie   sqrt(5) * fib(n+1) = phi^n + phi^(n-1) - psi^n - psi^(n-1)
+; = phi^(n-1) * (phi + 1) - psi^(n-1) * (psi + 1)
+;
+; oh shit
+; by the quadratic formulas we wrote, phi+1 is phi^2, same with psi^2
+;
+; so
+; sqrt(5) * fib(n+1) = phi^(n-1) * (phi + 1) - psi^(n-1) * (psi + 1)
+;                    = phi^(n-1) * phi^2     - psi^(n-1) * psi^2
+;                    = phi^(n+1)             - psi^(n+1)
+;
+; i.e. fib(n+1) = X[n+1] 
