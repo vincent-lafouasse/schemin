@@ -14,21 +14,21 @@
         let ((expected-value expected-expr) (actual-value actual-expr))
 
         (if (not (equal? expected-value actual-value))
-          (begin
-            (display (colorize color/red "-- assertion failed"))
-            (newline)
-            (display (colorize color/green "--   expected: "))
-            (display 'expected-expr) ; the quote means: do not evaluate, just print the S-expression
-            (display (colorize color/yellow " => "))
-            (display expected-value) ; this is the value
-            (newline)
-            (display (colorize color/red "--   actual:   "))
-            (display 'actual-expr)
-            (display (colorize color/yellow " => "))
-            (display actual-value)
-            (newline)
-            ; exiting is fine, this is meant for batch mode not interactive mode
-            (exit 1)
-        ))
+            (begin
+              (display (colorize color/red "-- assertion failed"))
+              (newline)
+              (display (colorize color/green "--   expected: "))
+              (display 'expected-expr) ; the quote means: do not evaluate, just print the S-expression
+              (display (colorize color/yellow " => "))
+              (display expected-value) ; this is the value
+              (newline)
+              (display (colorize color/red "--   actual:   "))
+              (display 'actual-expr)
+              (display (colorize color/yellow " => "))
+              (display actual-value)
+              (newline)
+              ; exiting is fine, this is meant for batch mode not interactive mode
+              (exit 1)
+          ))
       )
     )))
