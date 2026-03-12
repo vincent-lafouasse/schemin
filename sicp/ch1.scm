@@ -422,8 +422,8 @@ int f(int n) {
 (assert-eq (f-imperative 2)  2)
 (assert-eq (f-imperative 3)  4)
 
-;;;; 1.12 the Pascal triangle
-; by means of a recursive process
+;;;; 1.12 the Pascal triangle by means of a recursive process
+
 ; asking for a recursive process and not to craft an iterative implementation
 ; pushes me to just writing the naive version, ie to follow the mathematical
 ; definition without trying to be clever about the machine
