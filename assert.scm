@@ -13,7 +13,8 @@
        ; evaluate the expressions once and use them in `let`'s second argument
         let ((expected-value expected-expr) (actual-value actual-expr))
 
-        (if (not (equal? expected-value actual-value))
+        (if (equal? expected-value actual-value)
+            'ok
             (begin
               (display (colorize color/red "-- assertion failed"))
               (newline)
