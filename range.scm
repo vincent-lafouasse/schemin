@@ -1,13 +1,17 @@
 (load "maybe/maybe.scm")
 
-(define (range-iterator start maybe-end)
-  ; (list next '(start maybe-end))
-  (define next
-    (lambda ()
-      (if (and (just? maybe-end)
-               (>= start (maybe/unwrap maybe-end)))
-          (list something?? (nothing))
-          (list (range-iterator (+ 1 start) maybe-end)
-                (just start)))
-      ))
-  )
+; we'll try and make an OCaml sequence
+; an OCaml sequence is a thunk that optionally returns a value and the next
+; iterator
+
+(define (range start maybe-end)
+  (lambda ()
+    (if (and (maybe/just? maybe-end)
+             (>= start (maybe/unwrap maybe-end)))
+        (maybe/nothing)
+        (maybe/just (cons start (range (+ 1 start) maybe-end)))
+      )))
+
+(define it (range 0 (maybe/just 3)))
+
+(it) ; => (just (0 . #[compound-procedure 3]))
