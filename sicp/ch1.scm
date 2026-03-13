@@ -578,3 +578,46 @@ int f(int n) {
                        10000)))
 
 (id pi-approx) ; => 3.141592653410205
+
+;;;; 1.30 Sum as an iterative process
+
+; oops i accidentally did it in 1.29
+(define (sum term lower upper next)
+  (define (iter lower acc)
+    (if (> lower upper)
+        acc
+        (iter (next lower) (+ acc (term lower)))))
+
+  (iter lower 0.0))
+
+; oh well let's take this time to compute an nth approximation of pi
+
+; yeah it's a recursive process and kinda inefficient but i do not care
+; the radix 2 decimation is already taking the brunt of the work
+; also no i don't need negative `n`
+(define (pow-int x n)
+  (if (= n 0)
+      1
+      (let* ((half-pow (pow-int x (quotient n 2)))
+            (half-pow-squared (square half-pow))
+            (multiplier (if (even? n) 1 x)))
+        (* multiplier half-pow-squared)
+        )))
+
+(assert-eq (pow-int 0.5 2) 0.25)
+(assert-eq (pow-int 2 10) 1024)
+
+(define (basel order depth)
+  (define (term k) (/ 1.0 (pow-int k order)))
+  (define (inc k) (+ 1 k))
+  (sum term 1 depth inc))
+
+(define (pi-basel depth)
+  (define b (basel 2 depth))
+  (sqrt (* 6 b)))
+
+(pi-basel 100)   ; => 3.1320765318091053
+(pi-basel 1000)  ; => 3.1406380562059946
+(pi-basel 10000) ; => 3.1414971639472147
+; very slow convergence but pretty neat
+; also shoutout 3b1b for teaching me why pi is even there
